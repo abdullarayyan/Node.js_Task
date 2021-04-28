@@ -1,4 +1,4 @@
-const seat_reservation = require('../models/reservation')
+const seat_reservation = require('../models/reservationSchema')
 const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost:27017/flight', {

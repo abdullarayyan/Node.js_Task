@@ -1,4 +1,4 @@
-const leg_instance = require('../models/flight')
+const leg_instance = require('../models/flight_legSchema')
 const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost:27017/flight', {

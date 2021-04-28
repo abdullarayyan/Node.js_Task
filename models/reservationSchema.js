@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-
 const seat_reservation = new mongoose.Schema({
         flight_number: {type: String, index: true, ref: "fare"},
         leg_number: {type: Number},

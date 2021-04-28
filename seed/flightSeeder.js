@@ -1,4 +1,4 @@
-const flight_ = require('../models/flight')
+const flight_ = require('../models/flight_legSchema')
 const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost:27017/flight', {

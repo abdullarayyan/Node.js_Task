@@ -1,6 +1,6 @@
-const flight = require('./models/flight')
-const fares = require('./models/flight')
-const reservations = require('./models/reservation')
+const flight = require('./models/flight_legSchema')
+const fares = require('./models/flight_legSchema')
+const reservations = require('./models/reservationSchema')
 const mongoose = require('mongoose')
 
 
@@ -11,11 +11,10 @@ mongoose.connect('mongodb://localhost:27017/flight', {
 })
 
 const express = require('express')
-
 const app = express()
+
 app.get('/flights', function (req, res) {
     flight.find(function (err, result) {
-        
         res.status(200).json({
             status: 200,
             number_of_results: result.length,
@@ -26,14 +25,12 @@ app.get('/flights', function (req, res) {
                 error: err
             })
         }
-        
     });
 });
+
 app.get('/flight', function (req, res) {
-    
     const query = req.query.flight_number
     flight.find({flight_number: {$regex: query, $options: '$i'}}, function (err, result) {
-        
         res.status(200).json({
             status: 200,
             number_of_results: result.length,
@@ -44,7 +41,6 @@ app.get('/flight', function (req, res) {
                 error: err
             })
         }
-        
     });
 });
 
@@ -56,16 +52,13 @@ app.get('/fares', function (req, res) {
             })
         }
         res.status(200).json({
-            
             status: 200,
             number_of_results: result.length,
             fares: result
         })
     });
 });
-//
-//Flight_number, Leg_number, Date:date, Seat_number, Customer_name, Customer_phone
-// flight_number, date, seat_number, and customer name.
+
 app.get('/reservations', function (req, res) {
     reservations.find({}, {flight_number: 1, date: 1, seat_number: 1, customer_name: 1}, function (err, result) {
         if (err) {
@@ -74,22 +67,20 @@ app.get('/reservations', function (req, res) {
             })
         }
         res.status(200).json({
-            
             status: 200,
             number_of_results: result.length,
             reservations: result
         })
     });
 });
+
 app.get('/invoice', function (req, res) {
-    
     const query = req.query.customer_name
     reservations.find({customer_name: {$regex: query, $options: '$i'}}, {
         flight_number: 1,
         date: 1,
         fare: 1
     }, function (err, result) {
-        
         res.status(200).json({
             status: 200,
             number_of_results: result.length,
