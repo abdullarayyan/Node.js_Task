@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-
+const Schema = mongoose.Schema
 const airport = new mongoose.Schema(
     {
         airport_code: {type: String},
@@ -19,15 +19,14 @@ const flight_ = new mongoose.Schema(
     }, {collection: 'flight'},
 )
 
-const fare = new mongoose.Schema({
-        flight_number: {type: String},
+const fare = new Schema({
+        flight_number: {type: String,ref:"seat_reservation"},
         fare_code: {type: String},
         amount: {type: Number},
         restrictions: {type: Boolean},
-        seat_reservation:[{type:mongoose.Schema.Types.ObjectId,ref:'seat_reservation'}]
         
-    }, {collection: 'fare'},
-)
+        
+    }, {collection: 'fare'},)
 
 
 const airplane_type = new mongoose.Schema({
@@ -74,24 +73,14 @@ const leg_instance = new mongoose.Schema({
     }, {collection: 'leg_instance'},
 )
 
-const seat_reservation = new mongoose.Schema({
-        flight_number: {type: String},
-        leg_number: {type: Number},
-        date: {type: String},
-        Seat_number: {type: String},
-        customer_name: {type: String},
-        customer_phone: {type: String},
-        fare:[{type:mongoose.Schema.Types.ObjectId,ref:'fare'}]
-        
-    }, {collection: 'seat_reservation'},
-)
+
 
 module.exports = mongoose.model('airport', airport);
 module.exports = mongoose.model('flight', flight_);
 module.exports = mongoose.model('fare', fare);
-module.exports = mongoose.model('airplane_type', airplane_type);
-module.exports = mongoose.model('airplane', airplane);
-module.exports = mongoose.model('seat_reservation', seat_reservation);
-module.exports = mongoose.model('can_land', can_land);
-module.exports = mongoose.model('leg_instance', leg_instance);
-module.exports = mongoose.model('flight_leg ', flight_leg);
+// module.exports = mongoose.model('airplane_type', airplane_type);
+// module.exports = mongoose.model('airplane', airplane);
+//  module.exports = mongoose.model('seat_reservation', seat_reservation);
+// module.exports = mongoose.model('can_land', can_land);
+// module.exports = mongoose.model('leg_instance', leg_instance);
+// module.exports = mongoose.model('flight_leg ', flight_leg);

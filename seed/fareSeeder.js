@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost:27017/flight', {
 
 const fares = [
     new fare({
-        flight_number: 'UA560', fare_code: 'L', amount: '350', restrictions: 'no'
+        flight_number: "UA560", fare_code: 'L', amount: '350', restrictions: 'no'
     }),
     new fare({
         flight_number: 'G4154', fare_code: 'y', amount: '106', restrictions: 'no'
